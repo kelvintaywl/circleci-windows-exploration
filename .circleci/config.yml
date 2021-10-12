@@ -10,9 +10,16 @@ jobs:
     steps:
       - checkout
       - run:
-         name: verify user
-         command: |
-           whoami
+          name: check last commit details
+          command: |
+            # See PRETTY FORMATS section for pretty format options
+            # https://mirrors.edge.kernel.org/pub/software/scm/git/docs/git-log.html#:~:text=PRETTY-,FORMATS,-If%20the%20commit
+            LAST_COMMIT="$(git log -n 1 --pretty=format:"%ad" --date=iso)"
+            echo $LAST_COMMIT
+      - run:
+          name: verify user
+          command: |
+            whoami
       - run:
           name: check Docker version
           command: |
