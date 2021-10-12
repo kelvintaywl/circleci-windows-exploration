@@ -21,7 +21,7 @@ jobs:
       - run:
           name: verify C drive mountable
           command: |
-            docker run -v C:\Users\circleci\project:/data collectionpartnersolutions/legacy
+            docker run -v C:\Users\circleci\project:C:\Source collectionpartnersolutions/legacy
 workflows:
   main:
     jobs:
