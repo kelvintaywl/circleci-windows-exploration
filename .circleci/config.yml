@@ -10,18 +10,23 @@ jobs:
     steps:
       - checkout
       - run:
+         name: verify user
+         command: |
+           whoami
+      - run:
           name: check Docker version
           command: |
             docker --version
-      - run:
-          name: inspect Docker image
-          command: |
-            docker pull docker.io/collectionpartnersolutions/legacy
-            docker image inspect collectionpartnersolutions/legacy | jq ".[0]"
-      - run:
-          name: verify C drive mountable
-          command: |
-            docker run -v C:\Users\circleci\project:C:\Source collectionpartnersolutions/legacy
+            docker info
+#       - run:
+#           name: inspect Docker image
+#           command: |
+#             docker pull docker.io/collectionpartnersolutions/legacy
+#             docker image inspect collectionpartnersolutions/legacy | jq ".[0]"
+#       - run:
+#           name: verify C drive mountable
+#           command: |
+#             docker run -v C:\Users\circleci\project:C:\Source collectionpartnersolutions/legacy
 workflows:
   main:
     jobs:
