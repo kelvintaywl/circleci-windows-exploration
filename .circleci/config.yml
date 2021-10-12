@@ -21,7 +21,7 @@ jobs:
       - run:
           name: check folder permissions
           command: |
-            Dir C:\Users\circleci\project
+            Dir C:\Users\circleci\project | Get-Acl
 #       - run:
 #           name: inspect Docker image
 #           command: |
