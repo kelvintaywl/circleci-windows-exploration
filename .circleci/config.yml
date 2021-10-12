@@ -8,10 +8,15 @@ jobs:
   check_docker:
     executor: windows/default
     steps:
+      - checkout
       - run:
           name: check Docker version
           command: |
             docker --version
+      - run:
+          name: verify C drive mountable
+          command: |
+            docker run -v "C:\Users\circleci\project":/data alpine ls /data
       - run:
           name: inspect Docker image
           command: |
