@@ -1,17 +1,25 @@
 version: 2.1
 
+orbs:
+  docker: circleci/docker@1.7.0
+  windows: circleci/windows@2.4.1
+  
 jobs:
-  echo:
-    docker:
-      - image: cimg/base:stable
+  check_docker:
+    executor: windows/default
     steps:
       - run:
-          name: Greet
-          command: echo "I love ${COLOR} builds."
-          environment:
-            COLOR: "green"
+          name: check Docker version
+          command: |
+            docker --version
+      - run:
+          name: inspect Docker image
+          command: |
+            docker pull docker.io/collectionpartnersolutions/legacy
+            docker image inspect collectionpartnersolutions/legacy | jq ".[0]"
 
 workflows:
   main:
     jobs:
-      - echo
+      - check_docker
+ 
