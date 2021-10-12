@@ -14,15 +14,14 @@ jobs:
           command: |
             docker --version
       - run:
-          name: verify C drive mountable
-          command: |
-            docker run -v C:\Users\circleci\project:/data alpine ls /data
-      - run:
           name: inspect Docker image
           command: |
             docker pull docker.io/collectionpartnersolutions/legacy
             docker image inspect collectionpartnersolutions/legacy | jq ".[0]"
-
+      - run:
+          name: verify C drive mountable
+          command: |
+            docker run -v C:\Users\circleci\project:/data collectionpartnersolutions/legacy
 workflows:
   main:
     jobs:
