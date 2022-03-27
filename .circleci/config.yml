@@ -22,7 +22,7 @@ jobs:
       - run:
           name: Untar
           command: |
-            tar jxvf example.tar.bz2
+            tar xvf example.tar.bz2
             # there should be a PDF file extracted
             ls -laH example.pdf
   check_docker:
