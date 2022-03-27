@@ -1,10 +1,30 @@
 version: 2.1
 
+executors:
+  windows-medium:
+    machine:
+      image: windows-server-2019-vs2019:stable
+    resource_class: windows.medium
+    shell: bash.exe
+
 orbs:
   docker: circleci/docker@1.7.0
   windows: circleci/windows@2.4.1
   
 jobs:
+  untar_bz2:
+    executor: windows-medium
+    steps:
+      - run:
+          name: Download tar file (BZ2)
+          command: |
+            curl -s https://example-files.online-convert.com/archive/bz2/example.tar.bz2 > example.tar.bz2
+      - run:
+          name: Untar
+          command: |
+            tar jxvf example.tar.bz2
+            # there should be a PDF file extracted
+            ls -laH example.pdf
   check_docker:
     executor: windows/default
     steps:
@@ -41,5 +61,6 @@ jobs:
 workflows:
   main:
     jobs:
-      - check_docker
+#       - check_docker
+      - untar_bz2
  
